@@ -23,7 +23,7 @@ int main(int argc, char *argv[]){
   int j = 0;
   int k = 0;
   int currTick = 0;
-  int origNumTicks = 0;
+  int origNumTicks = 50;
   int numTicks = 0;
   int numSame = 0;
   int flag = 0;
@@ -39,11 +39,16 @@ int main(int argc, char *argv[]){
     return(1);
   }
 
-  if(atoi(argv[2]) == 0){
-    printf("Please enter a valid integer for <ticks>\n");
-    return(1);
+  if(argv[2] != NULL){
+    if(atoi(argv[2]) == 0){
+      printf("Please enter a valid integer for <ticks>\n");
+      return(1);
+    } else {
+      origNumTicks = atoi(argv[2]);
+      numTicks = origNumTicks;
+    }
   } else {
-    origNumTicks = atoi(argv[2]);
+    origNumTicks = 50;
     numTicks = origNumTicks;
   }
 
