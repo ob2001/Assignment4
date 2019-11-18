@@ -34,7 +34,7 @@ int main(int argc, char *argv[]){
   FILE *fp;
 
   /* Get information from command line. Break on incorrect format */
-  if((argv[1] == NULL) || (argv[2] == NULL)){
+  if(argc < 3){
     printf("Error - usage: ./cgol.c <seedfilename> <ticks>\n");
     return(1);
   }
@@ -71,11 +71,33 @@ int main(int argc, char *argv[]){
     }
   }
 
-  /* Open seed file to read if it exists */
+  /* Open seed file to read, if it exists */
   if((fp = fopen(argv[1], "r")) == NULL){
     printf("Error - cannot open file \"%s\"\n", argv[1]);
     return(1);
   }
+
+  /* Check whether seed is correct dimensions */
+  j = 0;
+  while((fgets(line, (2 * cols) + 1, fp)) != NULL){
+    i = 0;
+    while(*(line + i) != '\0'){
+      i++;
+    }
+    if(i != cols * 2){
+      printf("Error, invalid seed file for given dimensions. Terminating program.\n");
+      fclose(fp);
+      return(1);
+    }
+    j++;
+  }
+  if(j != rows){
+    printf("Error, invalid seed file for given dimensions. Terminating program.\n");
+    fclose(fp);
+    return(1);
+  }
+
+  rewind(fp);
 
   /* Copy contents of seed file to world struct array, close seed file */
   y = 0;

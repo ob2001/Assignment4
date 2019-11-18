@@ -23,7 +23,7 @@ int main(int argc, char *argv[]){
   int j = 0;
   int k = 0;
   int currTick = 0;
-  int origNumTicks = 0;
+  int origNumTicks = 50;
   int numTicks = 0;
   int numSame = 0;
   int flag = 0;
@@ -35,7 +35,7 @@ int main(int argc, char *argv[]){
 
   /* Get information from command line. Break on incorrect format */
   if(argc < 5){
-    printf("Error - usage: ./dyngol.c <seedfilename> <ticks> <columns> <rows>\n");
+    printf("Error - usage: ./dyngol.c <seedfilename> <ticks> <rows> <columns>\n");
     return(1);
   }
 
@@ -53,17 +53,17 @@ int main(int argc, char *argv[]){
   }
 
   if(atoi(argv[3]) == 0){
-    printf("Please enter a valid integer for <columns>\n");
-    return(1);
-  } else {
-    cols = atoi(argv[3]);
-  }
-
-  if(atoi(argv[4]) == 0){
     printf("Please enter a valid integer for <rows>\n");
     return(1);
   } else {
-    rows = atoi(argv[4]);
+    rows = atoi(argv[3]);
+  }
+
+  if(atoi(argv[4]) == 0){
+    printf("Please enter a valid integer for <columns>\n");
+    return(1);
+  } else {
+    cols = atoi(argv[4]);
   }
 
   /* Declare and initialize world and future world struct arrays */
@@ -85,7 +85,7 @@ int main(int argc, char *argv[]){
     }
   }
 
-  /* Open seed file to read if it exists */
+  /* Open seed file to read, if it exists */
   if((fp = fopen(argv[1], "r")) == NULL){
     printf("Error - cannot open file \"%s\"\n", argv[1]);
     return(1);
@@ -188,7 +188,13 @@ int main(int argc, char *argv[]){
     /* Print contents of world struct array */
     system("clear");
 
-    printf(" ---------------------------------------- \n");
+    x = 0;
+    y = 0;
+    printf(" ");
+    for(x = 0; x < cols; x++){
+      printf("-");
+    }
+    printf(" \n");
     while(y < rows){
       printf("|");
       x = 0;
@@ -199,7 +205,12 @@ int main(int argc, char *argv[]){
       printf("|\n");
       y++;
     }
-    printf(" ----------------------------------------%d\n", currTick);
+    printf(" ");
+    x = 0;
+    for(x = 0; x < cols; x++){
+      printf("-");
+    }
+    printf("%d\n", currTick);
     system("sleep 0.25");
 
     /* Iterate over each cell to see if it dies or comes to life. Store result in future struct array */
