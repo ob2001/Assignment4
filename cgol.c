@@ -35,7 +35,7 @@ int main(int argc, char *argv[]){
 
   /* Get information from command line. Break on incorrect format */
   if(argc < 3){
-    printf("Error - usage: ./cgol.c <seedfilename> <ticks>\n");
+    printf("Error - usage: ./cgol <seedfilename> <ticks>\n");
     return(1);
   }
 
