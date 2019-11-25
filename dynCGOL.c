@@ -35,7 +35,7 @@ int main(int argc, char *argv[]){
 
   /* Get information from command line. Break on incorrect format */
   if(argc < 5){
-    printf("Error - usage: ./dyngol <seedfilename> <ticks> <rows> <columns>\n");
+    printf("Error - usage: ./dynCGOL <seedfilename> <ticks> <rows> <columns>\n");
     return(1);
   }
 
